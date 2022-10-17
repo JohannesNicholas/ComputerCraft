@@ -1,28 +1,45 @@
-turtle.suck()
 
-l = string.gsub(turtle.getItemDetail()["name"], "minecraft:","" )
-n = string.byte(l) - 98
-down = false
-
-if (n > 13)
-then
-	n = n - 13
-	down = true
-end
-
-for i = 0, n, 1
+while(true)
 do
-	turtle.back()
-end
+	turtle.suck()
 
-if down
-then
-	turtle.dropDown()
-else
-	turtle.dropUp()
-end
+	if turtle.getItemCount(1) > 0 then
+		turtle.select(1)
+		
 
-for i = 0, n, 1
-do
-	turtle.forward()
+		-- Work out how far to move
+		l = string.gsub(turtle.getItemDetail()["name"], "minecraft:","" )
+		n = string.byte(l) - 98
+		down = false
+
+		-- if it is below or above
+		if (n > 13)
+		then
+			n = n - 13
+			down = true
+		end
+
+		-- Move to the correct position
+		for i = 0, n, 1
+		do
+			turtle.back()
+		end
+
+		-- Drop the item
+		if down
+		then
+			turtle.dropDown()
+		else
+			turtle.dropUp()
+		end
+
+		-- Move back to the start
+		for i = 0, n, 1
+		do
+			turtle.forward()
+		end
+
+	end
+
+	
 end
